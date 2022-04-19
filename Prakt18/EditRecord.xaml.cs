@@ -57,6 +57,7 @@ namespace Prakt18
             {
                 MessageBox.Show("Введены некорректные данные");
             }
+            DialogResult = true;
             Close();
         }
     }

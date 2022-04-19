@@ -4,9 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище ManySalesModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "ManySales.dbo.Sales" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+    <Schema Namespace="Хранилище ManySalesModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Sales">
           <Key>
             <PropertyRef Name="ID" />
@@ -23,23 +21,9 @@
           <Property Name="SellDate" Type="date" />
         </EntityType>
         <EntityContainer Name="Хранилище ManySalesModelContainer">
-          <EntitySet Name="Sales" EntityType="Self.Sales" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Sales].[ID] AS [ID], 
-    [Sales].[ProductName] AS [ProductName], 
-    [Sales].[SinglePrice] AS [SinglePrice], 
-    [Sales].[ArrivalDate] AS [ArrivalDate], 
-    [Sales].[BatchNumber] AS [BatchNumber], 
-    [Sales].[BatchSize] AS [BatchSize], 
-    [Sales].[BuyerCompany] AS [BuyerCompany], 
-    [Sales].[SelledBatchSize] AS [SelledBatchSize], 
-    [Sales].[SelledSinglePrice] AS [SelledSinglePrice], 
-    [Sales].[SellDate] AS [SellDate]
-    FROM [dbo].[Sales] AS [Sales]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Sales" EntityType="Self.Sales" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ManySalesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">

@@ -24,14 +24,13 @@ namespace Prakt18
         {
             throw new UnintentionalCodeFirstException();
         }
-    
-        public virtual DbSet<Sales> Sales { get; set; }
-        public static ManySalesDB context;
+        private static ManySalesDB context;
         public static ManySalesDB GetContext()
         {
             if (context == null)
                 context = new ManySalesDB();
             return context;
         }
+        public virtual DbSet<Sales> Sales { get; set; }
     }
 }

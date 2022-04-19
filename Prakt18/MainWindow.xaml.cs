@@ -21,35 +21,105 @@ namespace Prakt18
     /// </summary>
     public partial class MainWindow : Window
     {
-        ManySalesDB db = new ManySalesDB();
+        public ManySalesDB db = new ManySalesDB();
         AddProd add = new AddProd();
-
+        EditRecord editRecord = new EditRecord();
         public MainWindow()
         {
             InitializeComponent();
+            db.Sales.Load();
             mainGrid.ItemsSource = db.Sales.Local.ToBindingList();
+            if (mainGrid.SelectedIndex == -1)
+            {
+                bDelete.IsEnabled = false;
+                bChange.IsEnabled = false;
+            }
         }
 
-        private void AddProduct_Click(object sender, RoutedEventArgs e)
+        private void AddRecord_Click(object sender, RoutedEventArgs e)
         {
             Sales entry = new Sales();
-            add.ShowDialog();
-            entry.ProductName = add.ProductName;
-            entry.BatchNumber = add.BatchNumber;
-            entry.SinglePrice = add.SinglePrice;
-            entry.SelledSinglePrice = add.SelledSinglePrice;
-            entry.ArrivalDate = add.ArrivalDate;
-            entry.SellDate = add.SellDate;
-            entry.BatchSize = add.BatchSize;
-            entry.BuyerCompany = add.BuyerCompany;
-            entry.SelledBatchSize = add.SelledBatchSize;
+            if (add.ShowDialog() == false) return;
+            else
+            {
+                entry.ProductName = add.ProductName;
+                entry.BatchNumber = add.BatchNumber;
+                entry.SinglePrice = add.SinglePrice;
+                entry.SelledSinglePrice = add.SelledSinglePrice;
+                entry.ArrivalDate = add.ArrivalDate.Date;
+                entry.SellDate = add.SellDate.Date;
+                entry.BatchSize = add.BatchSize;
+                entry.BuyerCompany = add.BuyerCompany;
+                entry.SelledBatchSize = add.SelledBatchSize;
 
-            db.Sales.Add(entry);
-            db.SaveChanges();
+                db.Sales.Add(entry);
+                db.SaveChanges();
 
 
 
-            mainGrid.Items.Refresh();
+                mainGrid.Items.Refresh();
+            }
+        }
+
+        private void ChangeRecord_Click(object sender, RoutedEventArgs e)
+        {
+            int indexRow = mainGrid.SelectedIndex;
+            if (indexRow != -1)
+            {
+                Sales row = (Sales)mainGrid.Items[indexRow];
+                editRecord = new EditRecord();
+                if (editRecord.ShowDialog() == false) return;
+
+                else
+                {
+                    row = db.Sales.Find(indexRow);
+
+                    row.ProductName = editRecord.ProductName;
+                    row.BatchNumber = editRecord.BatchNumber;
+                    row.SinglePrice = editRecord.SinglePrice;
+                    row.SelledSinglePrice = editRecord.SelledSinglePrice;
+                    row.ArrivalDate = editRecord.ArrivalDate;
+                    row.SellDate = editRecord.SellDate;
+                    row.BatchSize = editRecord.BatchSize;
+                    row.BuyerCompany = editRecord.BuyerCompany;
+                    row.SelledBatchSize = editRecord.SelledBatchSize;
+
+                    db.SaveChanges();
+                    mainGrid.Items.Refresh();
+                }
+            }
+            else MessageBox.Show("Не выбрана запись");
+        }
+
+        private void DeleteRecord_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (mainGrid.SelectedIndex != -1)
+            {
+                Sales row = (Sales)mainGrid.Items[mainGrid.SelectedIndex];
+                var res = MessageBox.Show("Вы уверены что хотите удалить запись?","Удаление записи",MessageBoxButton.YesNo);
+                if (res == MessageBoxResult.Yes)
+                {
+                    db.Sales.Remove(row);
+                    db.SaveChanges();
+                    mainGrid.Items.Refresh();
+                }
+                else return;
+            }
+        }
+
+        private void GridSelectionChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            if (mainGrid.SelectedIndex != -1)
+            {
+                bDelete.IsEnabled = true;
+                bChange.IsEnabled = true;
+            }
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

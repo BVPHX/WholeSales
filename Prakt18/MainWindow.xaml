@@ -5,11 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Prakt18"
         mc:Ignorable="d"
-        Title="Учет оптовых продаж" Height="450" ResizeMode="NoResize" Width="800">
+        Title="Учет оптовых продаж" Height="470" ResizeMode="NoResize" Width="800">
     <Grid>
+        <Menu VerticalAlignment="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Добавить запись" Click="AddRecord_Click"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Выход" Click="Exit_Click"></MenuItem>
+
+        </Menu>
         <GroupBox Header="Таблица товаров" VerticalAlignment="Top" Margin="0,20,0,0" Height="300" Width="750">
-            <DataGrid x:Name="mainGrid"></DataGrid>
+            <DataGrid SelectedCellsChanged="GridSelectionChanged" AutoGenerateColumns="False" CanUserResizeColumns="False" CanUserResizeRows="True" x:Name="mainGrid" CanUserDeleteRows="False" IsReadOnly="True" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Кодовый номер товара" Binding="{Binding ID}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Название товара" Binding="{Binding ProductName}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Цена за ед. товара" Binding="{Binding SinglePrice}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Дата поставки" Binding="{Binding ArrivalDate, StringFormat=D}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Номер партии" Binding="{Binding BatchNumber}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Размер партии (Кол-во ед. товара)" Binding="{Binding BatchSize}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Компания покупатель" Binding="{Binding BuyerCompany}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Размер проданной партии" Binding="{Binding SelledBatchSize}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Цена ед. проданного товара" Binding="{Binding SelledSinglePrice}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Дата продажи" Binding="{Binding SellDate, StringFormat=D}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </GroupBox>
-        <Button VerticalAlignment="Top" Content="Добавить запись" Height="20" Margin="25,365,653,0" Click="AddProduct_Click"/>
+        <GroupBox Header="Управление таблицей" VerticalAlignment="Top" Margin="25,325,444,0" Height="99">
+            <StackPanel>
+                <Button x:Name="bAdd" Content="Добавить запись" Margin="0,5,0,0" Click="AddRecord_Click"/>
+                <Button x:Name="bChange"  Content="Изменить запись" Margin="0,5,0,0" Height="20" Click="ChangeRecord_Click"/>
+                <Button x:Name="bDelete" Content="Удалить запись" Margin="0,5,0,0" Height="20" Click="DeleteRecord_Click"></Button>
+            </StackPanel>
+
+        </GroupBox>
     </Grid>
 </Window>

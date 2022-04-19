@@ -1,0 +1,33 @@
+﻿<Window x:Class="Prakt18.EditRecord"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Prakt18"
+        mc:Ignorable="d"
+        Title="Редактирование записи" Height="470" Width="328">
+    <Grid>
+        
+        <StackPanel>
+            <Label Content="Название товара"></Label>
+            <TextBox x:Name="tbProdName"></TextBox>
+            <Label Content="Цена за единицу товара"></Label>
+            <TextBox x:Name="tbSinglePrice" PreviewTextInput="TextBox_PreviewTextInput"></TextBox>
+            <Label Content="Дата поставки"></Label>
+            <DatePicker x:Name="dpArrivalDate"></DatePicker>
+            <Label Content="Номер партии"></Label>
+            <TextBox x:Name="tbBatchNumber" PreviewTextInput="TextBox_PreviewTextInput"></TextBox>
+            <Label Content="Размер партии"></Label>
+            <TextBox x:Name="tbBatchSize" PreviewTextInput="TextBox_PreviewTextInput"></TextBox>
+            <Label Content="Покупающая компания"></Label>
+            <TextBox x:Name="tbBuyerCompany" ></TextBox>
+            <Label Content="Размер проданной партии"></Label>
+            <TextBox x:Name="tbSelledBatchSize"></TextBox>
+            <Label Content="Цена за ед. товара проданной партии"></Label>
+            <TextBox x:Name="tbSelledSinglePrice" PreviewTextInput="TextBox_PreviewTextInput"></TextBox>
+            <Label Content="Дата продажи"></Label>
+            <DatePicker x:Name="dpSellDate"></DatePicker>
+            <Button Content="Изменить" Click="EditRecord_Click"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

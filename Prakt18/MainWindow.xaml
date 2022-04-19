@@ -1,0 +1,15 @@
+﻿<Window x:Class="Prakt18.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Prakt18"
+        mc:Ignorable="d"
+        Title="Учет оптовых продаж" Height="450" ResizeMode="NoResize" Width="800">
+    <Grid>
+        <GroupBox Header="Таблица товаров" VerticalAlignment="Top" Margin="0,20,0,0" Height="300" Width="750">
+            <DataGrid x:Name="mainGrid"></DataGrid>
+        </GroupBox>
+        <Button VerticalAlignment="Top" Content="Добавить запись" Height="20" Margin="25,365,653,0" Click="AddProduct_Click"/>
+    </Grid>
+</Window>
